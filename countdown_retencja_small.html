@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Start 7-letniej retencji danych</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      font-family: 'Roboto Mono', monospace;
+      color: #e30613;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1em;
+      margin-bottom: 20px;
+      color: #e30613;
+      letter-spacing: 1px;
+    }
+
+    #countdown {
+      font-size: 1.5em;
+      background: #000;
+      color: #e30613;
+      padding: 15px 22px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(227, 6, 19, 0.5);
+      min-width: 240px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    #countdown:hover {
+      box-shadow: 0 0 30px rgba(227, 6, 19, 0.8);
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body>
+  <h1>Start 7-letniej retencji danych</h1>
+  <div id="countdown">Ładowanie...</div>
+
+  <script>
+    const targetDate = new Date("2025-07-01T00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      let distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "Czas rozpoczęty";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const milliseconds = Math.floor((distance % 1000) / 10); // setne sekundy
+
+      document.getElementById("countdown").innerHTML =
+        `${days}d ${hours}h ${minutes}m ${seconds}s ${milliseconds.toString().padStart(2, '0')}`;
+    }
+
+    setInterval(updateCountdown, 10);
+  </script>
+</body>
+</html>
